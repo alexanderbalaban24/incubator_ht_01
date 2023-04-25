@@ -57,6 +57,6 @@ export const validateVideoData = (req: Request, res: Response, next: NextFunctio
     if (!fieldsError.length) {
         next();
     } else {
-        res.status(400).send({errorsMessage: fieldsError})
+        res.status(400).send({errorsMessages: fieldsError})
     }
 }
