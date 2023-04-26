@@ -59,7 +59,7 @@ export const validateVideoData = (req: Request, res: Response, next: NextFunctio
             fieldsError.push(error);
         }
     }
-//------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------
     if (!author) {
         const error: ErrorField = {
             message: `The field Author should is not equal undefined`,

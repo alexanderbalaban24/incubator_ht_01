@@ -10,3 +10,9 @@ export interface IVideos {
     createdAt: string;
     publicationDate: string;
 }
+
+export interface IVideoTest {
+    title: string,
+    author: string,
+    availableResolutions: string[]
+}
