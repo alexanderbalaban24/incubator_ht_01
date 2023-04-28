@@ -1,6 +1,7 @@
+import {app} from "../../app";
+import {NEW_VIDEO_TEST} from "../../utils";
 import request from "supertest";
-import {app} from "../../src/setting";
-import {NEW_VIDEO_TEST} from "../../src/utils";
+
 
 describe('GET /videos', () => {
 

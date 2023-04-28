@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {deleteAllData} from "../controllers/testing-controller";
+import {deleteAllData} from "../controllers/testing.controller";
 
 export const testingRouter = Router();
 

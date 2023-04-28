@@ -1,7 +1,7 @@
-import {IVideoTest} from "./shared/interfaces";
+import {VideoTestType} from "./shared/types";
 
 
-export const NEW_VIDEO_TEST: IVideoTest = {
+export const NEW_VIDEO_TEST: VideoTestType = {
     title: "Test",
     author: "Sanya",
     availableResolutions: [

@@ -1,6 +1,6 @@
 import request from "supertest";
-import {app} from "../../src/setting";
-import {INVALID_STRING, NEW_VIDEO_TEST} from "../../src/utils";
+import {app} from "../../app";
+import {INVALID_STRING, NEW_VIDEO_TEST} from "../../utils";
 
 
 describe('POST /videos', () => {

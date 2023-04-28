@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {createVideo, deleteVideo, getAllVideos, getVideo, updateVideo} from "../controllers/videos-controller";
+import {createVideo, deleteVideo, getAllVideos, getVideo, updateVideo} from "../controllers/videos.controller";
 import {validateVideoData} from "../middleware/validate-video-data";
 
 export const videosRouter = Router();

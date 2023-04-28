@@ -1,8 +1,8 @@
 import {AvailableResolutions} from "../shared/enums";
-import {IVideos} from "../shared/interfaces";
+import {VideosType} from "../shared/types";
 
 
-export class Video implements IVideos {
+export class Video implements VideosType {
 
     public id: number = Math.floor(Math.random() * 99999999999999999999);
 
