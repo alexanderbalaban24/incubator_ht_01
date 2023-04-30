@@ -1,10 +1,16 @@
 import {NextFunction, Response} from "express";
 import {ErrorField, RequestWithBody} from "../shared/types";
 import {AvailableResolutions} from "../shared/enums";
-import {CreateVideoModel} from "../models/CreateVideoModel";
 import {UpdateVideoModel} from "../models/UpdateVideoModel";
 
 
+/**
+ * Validate video data
+ *
+ * @param {RequestWithBody<UpdateVideoModel>} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 export const validateVideoData = (req: RequestWithBody<UpdateVideoModel>, res: Response, next: NextFunction) => {
     const fieldsError: ErrorField[] = [];
     const {

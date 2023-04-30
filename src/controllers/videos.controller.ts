@@ -14,9 +14,26 @@ import {CreateVideoModel} from "../models/CreateVideoModel";
 import {UpdateVideoModel} from "../models/UpdateVideoModel";
 
 
+/**
+ * Get all videos
+ *
+ * @param {ResponseEmpty} req
+ * @param {Response<ViewVideoModel[]>} res
+ *
+ * @return {void}
+ */
 export const getAllVideos = (req: RequestEmpty, res: Response<ViewVideoModel[]>) => {
     res.status(200).send(DB);
 }
+
+/**
+ * Create new video
+ *
+ * @param {RequestWithBody<CreateVideoModel>} req
+ * @param {Response<ViewVideoModel>} res
+ *
+ * @return {void}
+ */
 export const createVideo = (req: RequestWithBody<CreateVideoModel>, res: Response<ViewVideoModel>) => {
     const {
         title,
@@ -29,6 +46,13 @@ export const createVideo = (req: RequestWithBody<CreateVideoModel>, res: Respons
     res.status(201).send(newVideo);
 }
 
+
+/**
+ *Get specific video
+ *
+ * @param {RequestWithParams<URIParamsVideoModel>} req
+ * @param {Response<ViewVideoModel>} res
+ */
 export const getVideo = (req: RequestWithParams<URIParamsVideoModel>, res: Response<ViewVideoModel>) => {
     const {id} = req.params;
 
@@ -41,6 +65,12 @@ export const getVideo = (req: RequestWithParams<URIParamsVideoModel>, res: Respo
     }
 }
 
+/**
+ * Deleting specific video
+ *
+ * @param {RequestWithParams<URIParamsVideoModel>} req
+ * @param {ResponseEmpty} res
+ */
 export const deleteVideo = (req: RequestWithParams<URIParamsVideoModel>, res: ResponseEmpty) => {
     const {id} = req.params;
 
@@ -54,6 +84,12 @@ export const deleteVideo = (req: RequestWithParams<URIParamsVideoModel>, res: Re
     }
 }
 
+/**
+ * Updating video
+ *
+ * @param {RequestWithParamsAndBody<URIParamsVideoModel, UpdateVideoModel>} req
+ * @param {ResponseEmpty} res
+ */
 export const updateVideo = (req: RequestWithParamsAndBody<URIParamsVideoModel, UpdateVideoModel>, res: ResponseEmpty) => {
     const {id} = req.params;
 
