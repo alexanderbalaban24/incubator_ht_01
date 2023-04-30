@@ -1,6 +1,4 @@
 import {Response} from "express";
-import {DB} from "../db/local-db";
-import {Video} from "../models/Video";
 import {
     RequestEmpty,
     RequestWithBody,
@@ -12,6 +10,7 @@ import {URIParamsVideoModel} from "../models/URIParamsVideoModel";
 import {ViewVideoModel} from "../models/ViewVideoModel";
 import {CreateVideoModel} from "../models/CreateVideoModel";
 import {UpdateVideoModel} from "../models/UpdateVideoModel";
+import {videosRepository} from "../repositories/videos-repository";
 
 
 /**
@@ -23,7 +22,8 @@ import {UpdateVideoModel} from "../models/UpdateVideoModel";
  * @return {void}
  */
 export const getAllVideos = (req: RequestEmpty, res: Response<ViewVideoModel[]>) => {
-    res.status(200).send(DB);
+    const videos = videosRepository.findVideos();
+    res.status(200).send(videos);
 }
 
 /**
@@ -41,8 +41,7 @@ export const createVideo = (req: RequestWithBody<CreateVideoModel>, res: Respons
         availableResolutions
     } = req.body;
 
-    const newVideo: ViewVideoModel = new Video(title, author, availableResolutions);
-    DB.push(newVideo);
+    const newVideo = videosRepository.createVideo(title, author, availableResolutions);
     res.status(201).send(newVideo);
 }
 
@@ -54,12 +53,9 @@ export const createVideo = (req: RequestWithBody<CreateVideoModel>, res: Respons
  * @param {Response<ViewVideoModel>} res
  */
 export const getVideo = (req: RequestWithParams<URIParamsVideoModel>, res: Response<ViewVideoModel>) => {
-    const {id} = req.params;
-
-    const index = DB.findIndex((el) => el.id === +id);
-
-    if (index != -1) {
-        res.status(200).send(DB[index]);
+    const video = videosRepository.findVideoById(+req.params.id);
+    if (video) {
+        res.status(200).send(video);
     } else {
         res.sendStatus(404);
     }
@@ -72,12 +68,9 @@ export const getVideo = (req: RequestWithParams<URIParamsVideoModel>, res: Respo
  * @param {ResponseEmpty} res
  */
 export const deleteVideo = (req: RequestWithParams<URIParamsVideoModel>, res: ResponseEmpty) => {
-    const {id} = req.params;
+    const isDeleted = videosRepository.deleteVideo(+req.params.id);
 
-    const index = DB.findIndex((el) => el.id === +id);
-
-    if (index != -1) {
-        DB.splice(index, 1);
+    if (isDeleted) {
         res.sendStatus(204);
     } else {
         res.sendStatus(404);
@@ -91,12 +84,9 @@ export const deleteVideo = (req: RequestWithParams<URIParamsVideoModel>, res: Re
  * @param {ResponseEmpty} res
  */
 export const updateVideo = (req: RequestWithParamsAndBody<URIParamsVideoModel, UpdateVideoModel>, res: ResponseEmpty) => {
-    const {id} = req.params;
+    const isUpdated = videosRepository.updateVideo(+req.params.id, req.body.title, req.body.author, req.body.availableResolutions, req.body.canBeDownloaded, req.body.minAgeRestriction, req.body.publicationDate);
 
-    const index = DB.findIndex((el) => el.id === +id);
-
-    if (index != -1) {
-        DB[index] = {...DB[index], ...req.body};
+    if (isUpdated) {
         res.sendStatus(204);
     } else {
         res.sendStatus(404);

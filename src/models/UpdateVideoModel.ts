@@ -4,7 +4,7 @@ export type UpdateVideoModel = {
     id: number
     title: string
     author: string
-    availableResolutions?: AvailableResolutions[]
+    availableResolutions: AvailableResolutions[]
     canBeDownloaded: boolean
     minAgeRestriction: number | null
     publicationDate: string
